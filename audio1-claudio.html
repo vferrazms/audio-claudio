@@ -111,7 +111,7 @@
   </style>
 </head>
 <body>
-    <div class="audio-container">
+  <div class="audio-container">
     <!-- Cole o link do Seu áudio Abaixo-->
     <audio class="plyr" src="https://s3.fr-par.scw.cloud/typebot/public/typebots/wnpoxjvf4m90klvcfx7nqnyi/blocks/mbi9ywptn62lq0hawrccazfr?v=1690772764167" autoplay></audio>
     <!-- Cole o link da Sua imagem Abaixo-->
@@ -149,8 +149,19 @@
       });
 
       // Adicionamos o autoplay aqui
-      audioElement.play();
+      audioElement.play().then(() => {
+        currentTimeElement.classList.remove('hide');
+        durationElement.classList.add('hide');
+        microphoneIcon.classList.add('blue'); // Adiciona a classe 'blue' para alterar a cor do ícone
+        audioElement.classList.add('blue'); // Adiciona a classe 'blue' para alterar o background do controle deslizante
+        audioElement.style.setProperty('--range-thumb-background', '#3db8ee');
+      }).catch(error => {
+        // O autoplay foi bloqueado pelo navegador ou ocorreu um erro
+        // Neste caso, o áudio não será reproduzido automaticamente
+        console.error('Autoplay bloqueado pelo navegador ou erro ao reproduzir o áudio:', error);
+      });
     });
   </script>
 </body>
 </html>
+
